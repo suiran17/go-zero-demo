@@ -1,4 +1,4 @@
-module go-zeor-demo
+module go-zero-demo
 
 go 1.19
 

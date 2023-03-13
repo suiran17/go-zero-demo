@@ -4,9 +4,9 @@ import (
 	"flag"
 	"fmt"
 
-	"go-zeor-demo/greet/internal/config"
-	"go-zeor-demo/greet/internal/handler"
-	"go-zeor-demo/greet/internal/svc"
+	"go-zero-demo/greet/internal/config"
+	"go-zero-demo/greet/internal/handler"
+	"go-zero-demo/greet/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"
