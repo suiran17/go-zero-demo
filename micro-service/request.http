@@ -1,0 +1,40 @@
+# -----------------------------------------------------------------------------
+# 微服务测试
+#
+# START
+# -----------------------------------------------------------------------------
+#
+
+# 1. 启动 user rpc
+#
+# 在 mall/user/rpc 目录
+# go run user.go -f  etc/user.yaml
+# 或者 go run user.go   // 使用默认配置文件
+#Starting rpc server at 127.0.0.1:8080...
+
+
+# 2. 启动 order api
+#
+# 在 mall/order/api 目录
+#$ go run order.go -f etc/order.yaml
+#Starting server at 0.0.0.0:8888...
+
+# 3. 访问 order api
+#
+# curl -i -X GET http://localhost:8888/api/order/get/1
+GET http://localhost:8888/api/order/get/1
+
+#HTTP/1.1 200 OK
+#Content-Type: application/json
+#Date: Sun, 07 Feb 2021 03:45:05 GMT
+#Content-Length: 30
+#
+#{"id":"1","name":"test order"}
+####
+
+#
+# -----------------------------------------------------------------------------
+# 微服务测试
+#
+# END
+# -----------------------------------------------------------------------------
