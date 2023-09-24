@@ -1,4 +1,4 @@
-module go-zero-demo
+module go-zero-demo-single-service
 
 go 1.19
 

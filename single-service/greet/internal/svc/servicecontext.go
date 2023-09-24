@@ -1,7 +1,7 @@
 package svc
 
 import (
-	"go-zero-demo/greet/internal/config"
+	"go-zero-demo-single-service/greet/internal/config"
 )
 
 type ServiceContext struct {

@@ -3,9 +3,9 @@ package handler
 import (
 	"net/http"
 
-	"go-zero-demo/mall/order/api/internal/logic"
-	"go-zero-demo/mall/order/api/internal/svc"
-	"go-zero-demo/mall/order/api/internal/types"
+	"go-zero-demo-micro-service/mall/order/api/internal/logic"
+	"go-zero-demo-micro-service/mall/order/api/internal/svc"
+	"go-zero-demo-micro-service/mall/order/api/internal/types"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
 )

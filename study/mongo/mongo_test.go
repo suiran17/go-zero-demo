@@ -22,6 +22,11 @@ type User struct {
 
 func TestMongoDB(t *testing.T) {
 
+	/*
+		db 相当于 mysql 数据库
+		collection 类似于数据库的 表
+		文档 类似于 数据库里面的一行记录
+	*/
 	conn := mon.MustNewModel("mongodb://admin:admin@dev.in:27017", "db", "collection")
 	// conn := mon.MustNewModel("mongodb://<admin>:<admin>@<dev.in>:<27017>", "db", "collection")
 	// conn := mon.MustNewModel("mongodb://<user>:<password>@<host>:<port>", "db", "collection")

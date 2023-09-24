@@ -4,10 +4,10 @@ import (
 	"context"
 	"errors"
 
-	"go-zero-demo/mall/user/rpc/types/user"
+	"go-zero-demo-micro-service/mall/user/rpc/types/user"
 
-	"go-zero-demo/mall/order/api/internal/svc"
-	"go-zero-demo/mall/order/api/internal/types"
+	"go-zero-demo-micro-service/mall/order/api/internal/svc"
+	"go-zero-demo-micro-service/mall/order/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

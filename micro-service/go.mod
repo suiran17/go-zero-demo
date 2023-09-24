@@ -1,4 +1,4 @@
-module go-zero-demo
+module go-zero-demo-micro-service
 
 go 1.19
 
