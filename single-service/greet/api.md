@@ -9,12 +9,14 @@
 syntax 语句用于标记 api 语言的版本，不同的版本可能语法结构有所不同，随着版本的提升会做不断的优化，当前版本为 v1。
 
 * 语法
-```text
+
+```go
 SyntaxStmt = "syntax" "=" "v1" .
 ```
 
 - 写法
-```text
+
+```go
 syntax = "v1"
 ```
 
@@ -26,14 +28,16 @@ syntax = "v1"
 info 语句是 api 语言的 meta 信息，其仅用于对当前 api 文件进行描述，暂不参与代码生成，其和注释还是有一些区别，注释一般是依附某个 syntax 语句存在，而 info 语句是用于描述整个 api 信息的，当然，不排除在将来会参与到代码生成里面来，info 语句的 EBNF 表示为
 
 - 语法
-```text
+
+```go
 InfoStmt         = "info" "(" { InfoKeyValueExpr } ")" .
 InfoKeyValueExpr = InfoKeyLit [ interpreted_string_lit ] .
 InfoKeyLit       = identifier ":" .
 ```
 
 - 写法
-```text
+
+```go
 // 不包含 key-value 的 info 块
 info ()
 
@@ -47,14 +51,14 @@ info (
 ### import 语句
 
 - 语法
-```text
+```go
 ImportStmt        = ImportLiteralStmt | ImportGroupStmt .
 ImportLiteralStmt = "import" interpreted_string_lit .
 ImportGroupStmt   = "import" "(" { interpreted_string_lit } ")" .
 ```
 
 - 写法
-```text
+```go
 // 单行 import
 import "foo"
 import "/path/to/file"
@@ -70,7 +74,7 @@ import (
 ### 数据类型
 
 - 语法
-```text
+```go
 TypeStmt          = TypeLiteralStmt | TypeGroupStmt .
 TypeLiteralStmt   = "type" TypeExpr .
 TypeGroupStmt     = "type" "(" { TypeExpr } ")" .
@@ -96,7 +100,7 @@ Tag               = raw_string_lit .
 ```
 
 - 写法
-```text
+```go
 // 别名类型 [1]
 type Int int
 type Integer = int
@@ -155,7 +159,7 @@ type (
 
 #### server 语句 
 
-```api
+```go
 // 空内容
 @server()
 
@@ -211,7 +215,7 @@ AtServerKeyLit   = identifier ":" .
 ```
 * 写法
 
-```text
+```go
 // 单行 @doc
 @doc "foo"
 
@@ -229,11 +233,11 @@ bar: "baz"
 
 @handler 语句是对单个路由的 handler 信息控制，主要用于生成 golang http.HandleFunc 的实现转换方法，其 EBNF 表示为：
 
-```text
+```go
 AtHandlerStmt = "@handler" identifier .
 ```
 
-```api
+```go
 @handler foo
 ```
 
@@ -241,7 +245,7 @@ AtHandlerStmt = "@handler" identifier .
 
 * 语法
 
-```text
+```go
 RouteStmt = Method PathExpr [ BodyStmt ] [ "returns" ] [ BodyStmt ].
 Method    = "get"     | "head"    | "post" | "put" | "patch" | "delete" |
             "connect" | "options" | "trace" .
@@ -251,7 +255,7 @@ BodyStmt  = "(" identifier ")" .
 
 * 写法
 
-```text
+```go
 // 没有请求体和响应体的写法
 get /ping
 
@@ -267,7 +271,7 @@ post /foo (foo) returns (bar)       // 有 "传参", 有 "返回"
 
 ##### api 定义完整示例
 
-```api
+```go
 syntax = "v1"
 
 info (
@@ -367,7 +371,7 @@ service Foo {
 
 ## 示例1
 
-```api
+```go
 type Request {
 	Name string `path:"name,options=you|me"`
 }
@@ -384,7 +388,7 @@ service greet-api {
 
 ## 示例2
 
-```api
+```go
 
 type StructureExample {
     // 基本数据类型示例
@@ -426,7 +430,7 @@ type StructureExample {
 > 然后通过 @handler 来声明了路由处理函数，
 > 这样我们就可以通过路由前缀来区分不同的版本了。
 
-```api
+```go
 // 有前缀的 api
 syntax = "v1"
 
@@ -552,7 +556,7 @@ https://example.com/v1/user/class/delete
 
 ### api
 
-```api
+```go
 syntax = "v1"
 
 type (
@@ -635,7 +639,7 @@ service user-api {
 
 ### 生成的代码
 
-```text
+```go
 .
 ├── etc
 │ └── user-api.yaml
@@ -690,7 +694,7 @@ service user-api {
 由于我们没有进行分组，所以生成的代码中 **handler** 和 **logic** 目录下的文件是全部揉在一起的，这样的目录结构在项目中不太好管理和阅读，接下来我们按照 user，role，class 来进行分组，在 api 语言中，我们可以通过在 @server 语句块中使用 group 关键字来进行分组，分组的语法如下：
 
 ### api
-```api
+```go
 syntax = "v1"
 
 type (
@@ -795,7 +799,7 @@ service user-api {
 
 > **handler** **logic** 里面的代码 根绝 api 分组(**分别存在放对应的层级目录里面**)
 
-```text
+```go
 .
 ├── etc
 │ └── user-api.yaml
