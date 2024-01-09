@@ -1,0 +1,11 @@
+###
+
+# curl http://localhost:8888/from/you
+GET http://localhost:8888/from/you
+
+
+###
+#GET http://localhost:8888/from/哈哈哈哈
+
+###
+
