@@ -13,11 +13,22 @@ type HelloWorld {
 	Message string `json:"message"`
 }
 
+type HelloReq {
+	Name string `path:"name"`
+}
+
+type HelloResp {
+	Message string `json:"message"`
+}
+
 service greet-api {
 	@handler GreetHandler
 	get /from/:name (Request) returns (Response)
 
 	@handler helloworld
 	get /helloworld returns (HelloWorld)
+
+	@handler hello
+	get /hello/:name (HelloReq) returns (HelloResp)
 }
 
