@@ -5,5 +5,4 @@
 
 
 ## 修改参数
-![image](image.png)
 ![image](md.images/image.png)
