@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package helllo;
+option go_package="./helllo";
+
+message Request {
+  string ping = 1;
+}
+
+message Response {
+  string pong = 1;
+}
+
+service Helllo {
+  rpc Ping(Request) returns(Response);
+}
