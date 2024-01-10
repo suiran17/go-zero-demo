@@ -3,10 +3,11 @@ package handler
 import (
 	"net/http"
 
-	"github.com/zeromicro/go-zero/rest/httpx"
 	"greet/internal/logic"
 	"greet/internal/svc"
 	"greet/internal/types"
+
+	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 func helloHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
