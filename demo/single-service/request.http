@@ -1,0 +1,51 @@
+# -----------------------------------------------------------------------------
+# 单体服务测试
+#
+# START
+# -----------------------------------------------------------------------------
+
+#启动并访问服务#
+#启动服务
+#
+#$ cd greet
+#$ go run greet.go -f etc/greet-api.yaml
+#输出如下，服务启动并侦听在8888端口：
+#
+#Starting server at 0.0.0.0:8888...
+#访问服务
+#
+#$ curl -i -X GET http://localhost:8888/from/you
+#返回如下：
+#
+#HTTP/1.1 200 OK
+#Content-Type: application/json
+#Date: Sun, 07 Feb 2021 04:31:25 GMT
+#Content-Length: 27
+#
+#{"message":"Hello go-zero"}
+
+# curl -i -X GET http://localhost:8888/from/you
+GET http://localhost:8880/from/you
+
+#
+#HTTP/1.1 200 OK
+#Content-Type: application/json; charset=utf-8
+#Traceparent: 00-7c63121bbce8827b5802643fa29011bb-eef16d5b67a2f0d6-00
+#Date: Mon, 13 Mar 2023 04:13:04 GMT
+#Content-Length: 27
+#
+#{
+#  "message": "Hello go-zero"
+#}
+#Response file saved.
+#> 2023-03-13T121304.200.json
+
+###
+
+
+#
+# -----------------------------------------------------------------------------
+# 单体服务测试
+#
+# END
+# -----------------------------------------------------------------------------
