@@ -11,6 +11,15 @@ message Response {
   string pong = 1;
 }
 
+message HelloWorldRequest {
+  string name = 1;
+}
+
+message HelloWorldResponse {
+  string message = 1;
+}
+
 service Helllo {
   rpc Ping(Request) returns(Response);
+  rpc HelloWorld(HelloWorldRequest) returns(HelloWorldResponse);
 }

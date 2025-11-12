@@ -20,7 +20,8 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Helllo_Ping_FullMethodName = "/helllo.Helllo/Ping"
+	Helllo_Ping_FullMethodName       = "/helllo.Helllo/Ping"
+	Helllo_HelloWorld_FullMethodName = "/helllo.Helllo/HelloWorld"
 )
 
 // HellloClient is the client API for Helllo service.
@@ -28,6 +29,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type HellloClient interface {
 	Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	HelloWorld(ctx context.Context, in *HelloWorldRequest, opts ...grpc.CallOption) (*HelloWorldResponse, error)
 }
 
 type hellloClient struct {
@@ -47,11 +49,21 @@ func (c *hellloClient) Ping(ctx context.Context, in *Request, opts ...grpc.CallO
 	return out, nil
 }
 
+func (c *hellloClient) HelloWorld(ctx context.Context, in *HelloWorldRequest, opts ...grpc.CallOption) (*HelloWorldResponse, error) {
+	out := new(HelloWorldResponse)
+	err := c.cc.Invoke(ctx, Helllo_HelloWorld_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // HellloServer is the server API for Helllo service.
 // All implementations must embed UnimplementedHellloServer
 // for forward compatibility
 type HellloServer interface {
 	Ping(context.Context, *Request) (*Response, error)
+	HelloWorld(context.Context, *HelloWorldRequest) (*HelloWorldResponse, error)
 	mustEmbedUnimplementedHellloServer()
 }
 
@@ -61,6 +73,9 @@ type UnimplementedHellloServer struct {
 
 func (UnimplementedHellloServer) Ping(context.Context, *Request) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
+}
+func (UnimplementedHellloServer) HelloWorld(context.Context, *HelloWorldRequest) (*HelloWorldResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HelloWorld not implemented")
 }
 func (UnimplementedHellloServer) mustEmbedUnimplementedHellloServer() {}
 
@@ -93,6 +108,24 @@ func _Helllo_Ping_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Helllo_HelloWorld_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HelloWorldRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HellloServer).HelloWorld(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Helllo_HelloWorld_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HellloServer).HelloWorld(ctx, req.(*HelloWorldRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Helllo_ServiceDesc is the grpc.ServiceDesc for Helllo service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -103,6 +136,10 @@ var Helllo_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Ping",
 			Handler:    _Helllo_Ping_Handler,
+		},
+		{
+			MethodName: "HelloWorld",
+			Handler:    _Helllo_HelloWorld_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

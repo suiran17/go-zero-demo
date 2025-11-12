@@ -26,3 +26,8 @@ func (s *HellloServer) Ping(ctx context.Context, in *helllo.Request) (*helllo.Re
 	l := logic.NewPingLogic(ctx, s.svcCtx)
 	return l.Ping(in)
 }
+
+func (s *HellloServer) HelloWorld(ctx context.Context, in *helllo.HelloWorldRequest) (*helllo.HelloWorldResponse, error) {
+	l := logic.NewHelloWorldLogic(ctx, s.svcCtx)
+	return l.HelloWorld(in)
+}

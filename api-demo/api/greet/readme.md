@@ -3,6 +3,11 @@
 ## 调用
 ![md.images](md.images/md.images.png)
 
+```
+$ curl localhost:8888/from/you
+{"message":"Hello go-zero you"}
+```
+
 
 ## 修改参数
 ![image](md.images/image.png)
